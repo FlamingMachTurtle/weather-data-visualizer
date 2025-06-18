@@ -1,8 +1,8 @@
-# 🌦️ Interactive Weather Data Visualizer
+# Interactive Weather Data Visualizer
 
 A modern, interactive web application that visualizes real-time weather data from around the world with beautiful charts and controls.
 
-## ✨ Features
+## Features
 
 - **Real-time Weather Data** - Fetches live weather information using WeatherAPI.com
 - **Interactive Charts** - Dynamic temperature trends and precipitation visualizations
@@ -12,11 +12,11 @@ A modern, interactive web application that visualizes real-time weather data fro
 - **Responsive Design** - Works seamlessly on desktop and mobile devices
 - **Export Functionality** - Download weather data for analysis
 
-## 🚀 Demo
+## Demo
 
-Open `index.html` in your browser to see the visualizer in action!
+[Click Here](https://flamingmachturtle.github.io/weather-data-visualizer/) to see the visualizer in action!
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **HTML5** - Modern semantic markup
 - **CSS3** - Responsive design with Flexbox/Grid
@@ -30,7 +30,7 @@ Open `index.html` in your browser to see the visualizer in action!
 - Internet connection for live weather data
 - WeatherAPI.com API key (free tier available)
 
-## 🔧 Setup
+## Setup
 
 1. **Clone the repository**
    ```bash
@@ -48,7 +48,7 @@ Open `index.html` in your browser to see the visualizer in action!
    - Enter your API key when prompted
    - Start exploring weather data!
 
-## 🎯 Usage
+## Usage
 
 ### Getting Started
 1. Open the application in your browser
@@ -66,13 +66,13 @@ Open `index.html` in your browser to see the visualizer in action!
 - **Interactive Charts** - Hover for detailed information
 - **Export Data** - Download weather information as JSON
 
-## 🔒 Security & Privacy
+## Security & Privacy
 
 - **Local Storage Only** - API keys are stored in your browser, never transmitted to third parties
 - **No Data Collection** - This application doesn't collect or store any personal information
 - **Secure API Calls** - Direct communication with WeatherAPI.com using HTTPS
 
-## 🌍 Supported Locations
+## Supported Locations
 
 - London, UK
 - New York, USA
@@ -83,14 +83,14 @@ Open `index.html` in your browser to see the visualizer in action!
 - Cairo, Egypt
 - Mumbai, India
 
-## 📊 Data Sources
+## Data Sources
 
 This application uses [WeatherAPI.com](https://www.weatherapi.com/) for real-time weather data. The free tier includes:
 - Current weather conditions
 - 7-day historical data
 - 1 million API calls per month
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
@@ -100,19 +100,12 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [WeatherAPI.com](https://www.weatherapi.com/) for providing reliable weather data
 - Canvas API for enabling custom chart visualizations
 - The open-source community for inspiration and best practices
 
-## 📞 Support
-
-If you encounter any issues or have questions:
-1. Check the [Issues](https://github.com/yourusername/weather-data-visualizer/issues) page
-2. Create a new issue if your problem isn't already listed
-3. Provide as much detail as possible about your setup and the issue
-
 ---
 
-⭐ **Star this repository if you found it helpful!** 
+**Star this repository if you found it helpful!** 
