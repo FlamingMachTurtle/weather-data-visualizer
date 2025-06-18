@@ -861,18 +861,26 @@
             const canvas = document.getElementById('temp-chart');
             const container = canvas.parentElement;
             
-            // Set canvas size
-            canvas.width = container.clientWidth - 40;
-            canvas.height = 150;
-            canvas.style.width = (container.clientWidth - 40) + 'px';
-            canvas.style.height = '150px';
+            // Get device pixel ratio for crisp rendering
+            const dpr = window.devicePixelRatio || 1;
+            const displayWidth = container.clientWidth - 40;
+            const displayHeight = 150;
+            
+            // Set canvas size with device pixel ratio
+            canvas.width = displayWidth * dpr;
+            canvas.height = displayHeight * dpr;
+            canvas.style.width = displayWidth + 'px';
+            canvas.style.height = displayHeight + 'px';
             
             const ctx = canvas.getContext('2d');
             
-            // Chart dimensions
+            // Scale the context to match device pixel ratio
+            ctx.scale(dpr, dpr);
+            
+            // Chart dimensions (use display size, not scaled canvas size)
             const padding = 25;
-            const chartWidth = canvas.width - padding * 2;
-            const chartHeight = canvas.height - padding * 2;
+            const chartWidth = displayWidth - padding * 2;
+            const chartHeight = displayHeight - padding * 2;
             
             // Find min/max temperatures
             const temps = data.map(d => d.temp);
@@ -880,11 +888,11 @@
             const maxTemp = Math.max(...temps) + 3;
             
             // Clear canvas
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            const gradient = ctx.createLinearGradient(0, 0, 0, displayHeight);
             gradient.addColorStop(0, '#f8fafc');
             gradient.addColorStop(1, '#e2e8f0');
             ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, displayWidth, displayHeight);
             
             // Draw grid
             ctx.strokeStyle = '#cbd5e0';
@@ -895,7 +903,7 @@
                 const y = padding + (chartHeight / 5) * i;
                 ctx.beginPath();
                 ctx.moveTo(padding, y);
-                ctx.lineTo(canvas.width - padding, y);
+                ctx.lineTo(displayWidth - padding, y);
                 ctx.stroke();
                 
                 // Temperature labels
@@ -911,13 +919,13 @@
                 const x = padding + (chartWidth / (data.length - 1)) * i;
                 ctx.beginPath();
                 ctx.moveTo(x, padding);
-                ctx.lineTo(x, canvas.height - padding);
+                ctx.lineTo(x, displayHeight - padding);
                 ctx.stroke();
             }
             
             // Draw temperature area
             ctx.beginPath();
-            ctx.moveTo(padding, canvas.height - padding);
+            ctx.moveTo(padding, displayHeight - padding);
             
             data.forEach((point, index) => {
                 const x = padding + (chartWidth / (data.length - 1)) * index;
@@ -930,10 +938,10 @@
                 }
             });
             
-            ctx.lineTo(canvas.width - padding, canvas.height - padding);
+            ctx.lineTo(displayWidth - padding, displayHeight - padding);
             ctx.closePath();
             
-            const areaGradient = ctx.createLinearGradient(0, padding, 0, canvas.height - padding);
+            const areaGradient = ctx.createLinearGradient(0, padding, 0, displayHeight - padding);
             areaGradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)');
             areaGradient.addColorStop(1, 'rgba(59, 130, 246, 0.05)');
             ctx.fillStyle = areaGradient;
@@ -993,7 +1001,7 @@
                 ctx.font = 'bold 5.5px sans-serif';
                 ctx.textAlign = 'center';
                 const dateStr = point.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                ctx.fillText(dateStr, x, canvas.height - 5);
+                ctx.fillText(dateStr, x, displayHeight - 5);
             });
             
             // Create tooltip element
@@ -1030,8 +1038,8 @@
             // Add hover interaction
             canvas.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
-                const mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
-                const mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
                 
                 // Find closest data point within hover radius
                 let closestPoint = null;
@@ -1093,25 +1101,33 @@
             const canvas = document.getElementById('precip-chart');
             const container = canvas.parentElement;
             
-            // Set canvas size
-            canvas.width = container.clientWidth - 40;
-            canvas.height = 125;
-            canvas.style.width = (container.clientWidth - 40) + 'px';
-            canvas.style.height = '125px';
+            // Get device pixel ratio for crisp rendering
+            const dpr = window.devicePixelRatio || 1;
+            const displayWidth = container.clientWidth - 40;
+            const displayHeight = 125;
+            
+            // Set canvas size with device pixel ratio
+            canvas.width = displayWidth * dpr;
+            canvas.height = displayHeight * dpr;
+            canvas.style.width = displayWidth + 'px';
+            canvas.style.height = displayHeight + 'px';
             
             const ctx = canvas.getContext('2d');
             
-            // Chart dimensions
+            // Scale the context to match device pixel ratio
+            ctx.scale(dpr, dpr);
+            
+            // Chart dimensions (use display size, not scaled canvas size)
             const padding = 25;
-            const chartWidth = canvas.width - padding * 2;
-            const chartHeight = canvas.height - padding * 2;
+            const chartWidth = displayWidth - padding * 2;
+            const chartHeight = displayHeight - padding * 2;
             
             // Clear canvas
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            const gradient = ctx.createLinearGradient(0, 0, 0, displayHeight);
             gradient.addColorStop(0, '#f8fafc');
             gradient.addColorStop(1, '#e2e8f0');
             ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, displayWidth, displayHeight);
             
             // Draw precipitation bars
             const barWidth = Math.max(5, chartWidth / data.length * 0.6);
@@ -1147,7 +1163,7 @@
                 ctx.font = '4.5px sans-serif';
                 ctx.textAlign = 'center';
                 const dateStr = point.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                ctx.fillText(dateStr, x + barWidth / 2, canvas.height - 3);
+                ctx.fillText(dateStr, x + barWidth / 2, displayHeight - 3);
             });
             
             // Legend
@@ -1165,7 +1181,7 @@
                 const y = padding + (chartHeight / 4) * i;
                 ctx.beginPath();
                 ctx.moveTo(padding, y);
-                ctx.lineTo(canvas.width - padding, y);
+                ctx.lineTo(displayWidth - padding, y);
                 ctx.stroke();
                 
                 // Left Y-axis labels (Precipitation)
@@ -1180,7 +1196,7 @@
                 ctx.fillStyle = '#10b981';
                 ctx.font = 'bold 5.5px sans-serif';
                 ctx.textAlign = 'left';
-                ctx.fillText(humidityValue + '%', canvas.width - padding + 5, y + 2);
+                ctx.fillText(humidityValue + '%', displayWidth - padding + 5, y + 2);
             }
             
             // Create tooltip element for precipitation chart
@@ -1228,8 +1244,8 @@
             // Add hover interaction for precipitation chart
             canvas.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
-                const mouseX = (e.clientX - rect.left) * (canvas.width / rect.width);
-                const mouseY = (e.clientY - rect.top) * (canvas.height / rect.height);
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
                 
                 // Find hovered bar or humidity point
                 let hoveredPoint = null;
